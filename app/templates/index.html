@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InstaTone — Free Ringtone Maker</title>
+<meta name="description" content="InstaTone is a simple ringtone maker for creating MP3 ringtones from audio and video files. Trim your media and download your ringtone.">
+<meta name="keywords" content="ringtone maker, MP3 ringtone maker, audio cutter, ringtone creator">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="InstaTone — Free Ringtone Maker">
+<meta property="og:description" content="Create a ringtone from your audio or video file with InstaTone.">
+<meta property="og:type" content="website">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Segoe UI,Arial,sans-serif;
+  background:#0b1020;color:#fff;min-height:100vh;
+}
+.container{width:min(760px,92%);margin:45px auto}
+h1{text-align:center;margin:0;font-size:38px}
+.subtitle{text-align:center;color:#94a3b8;margin:8px 0 30px}
+.card{
+  background:#151c2e;border:1px solid #29334d;border-radius:18px;
+  padding:25px;box-shadow:0 15px 40px rgba(0,0,0,.35)
+}
+.tabs{display:flex;gap:8px;margin-bottom:22px}
+.tab{
+  flex:1;padding:13px;border:1px solid #33405d;background:#101727;
+  color:#9fb0ca;border-radius:10px;cursor:pointer;font-size:15px
+}
+.tab.active{background:#2563eb;color:#fff;border-color:#3b82f6}
+.panel{display:none}.panel.active{display:block}
+label{display:block;margin:0 0 8px;color:#b9c7dc;font-weight:600}
+input[type=file],input[type=text]{
+  width:100%;padding:14px;background:#0d1424;border:1px solid #33405d;
+  color:#fff;border-radius:10px
+}
+input:focus{outline:none;border-color:#3b82f6}
+.drop{
+  border:2px dashed #33405d;border-radius:12px;padding:25px;text-align:center;
+  cursor:pointer;background:#101727
+}
+.drop:hover{border-color:#3b82f6}
+.drop input{margin-top:12px}
+button.main{
+  width:100%;margin-top:16px;padding:14px;border:0;border-radius:10px;
+  background:#2563eb;color:#fff;font-size:16px;font-weight:700;cursor:pointer
+}
+button.main:hover{background:#1d4ed8}
+button:disabled{opacity:.6;cursor:not-allowed}
+.preview{
+  display:none;margin-top:25px;padding:20px;background:#0e1525;
+  border:1px solid #293852;border-radius:14px
+}
+.preview.show{display:block}
+audio{width:100%;margin-bottom:15px}
+.wave{
+  height:130px;background:#09101d;border:1px solid #26344e;
+  border-radius:10px;position:relative;overflow:hidden;touch-action:none
+}
+canvas{width:100%;height:100%;display:block}
+.selection{
+  position:absolute;top:0;bottom:0;background:rgba(37,99,235,.25);
+  border-left:2px solid #60a5fa;border-right:2px solid #60a5fa;
+  pointer-events:none
+}
+.handle{
+  position:absolute;top:0;bottom:0;width:20px;transform:translateX(-50%);
+  cursor:ew-resize;z-index:3
+}
+.handle:after{
+  content:"";position:absolute;left:50%;top:15px;bottom:15px;width:4px;
+  transform:translateX(-50%);background:#fff;border-radius:4px
+}
+.times{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.time{background:#151f32;padding:12px;border-radius:9px;text-align:center}
+.time small{display:block;color:#8290a8;font-size:11px;margin-bottom:5px}
+.time b{color:#60a5fa;font-family:Consolas,monospace}
+.result{
+  display:none;margin-top:20px;padding:15px;border-radius:10px;
+  background:#101a2a;border:1px solid #33405d
+}
+.result.show{display:block}
+.success{color:#34d399;font-weight:700}
+.error{color:#fb7185;font-weight:700}
+.download{
+  display:inline-block;margin-top:12px;padding:11px 17px;
+  background:#22c55e;color:#06120b;text-decoration:none;border-radius:8px;
+  font-weight:700
+}
+@media(max-width:600px){.times{grid-template-columns:1fr}.container{margin:25px auto}}
+
+.site-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;padding:12px 2px}
+.brand{font-weight:800;font-size:20px}
+.site-header nav{display:flex;gap:18px}
+.site-header nav a{color:#94a3b8;text-decoration:none;font-size:13px}
+.site-header nav a:hover{color:#fff}
+.hero{text-align:center;margin-bottom:24px}
+.hero h1{margin:0;font-size:36px}
+.hero p{max-width:680px;margin:10px auto 0;color:#94a3b8;line-height:1.6}
+.info-section{margin-top:28px;background:#151c2e;border:1px solid #29334d;border-radius:18px;padding:24px}
+.info-section h2{margin-top:0}
+.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.info-grid>div{background:#101727;border:1px solid #293852;border-radius:10px;padding:15px}
+.info-grid p,.info-section details p{color:#94a3b8;line-height:1.5;font-size:13px}
+.info-section details{border-top:1px solid #293852;padding:13px 0}
+.info-section summary{cursor:pointer;font-weight:700}
+.legal-note{color:#71809a;font-size:12px;margin-bottom:0}
+.site-footer{display:flex;justify-content:space-between;color:#64748b;font-size:12px;padding:24px 4px 40px;gap:15px;flex-wrap:wrap}
+.site-footer a{color:#94a3b8;text-decoration:none;margin-left:14px}.site-footer a:hover{color:#fff}
+.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.guide-card{background:#101727;border:1px solid #293852;border-radius:10px;padding:17px}.guide-card h3{margin:0 0 8px}.guide-card p{color:#94a3b8;line-height:1.55;font-size:13px;margin-bottom:0}.contact-box{background:#101727;border:1px solid #293852;border-radius:10px;padding:18px;color:#94a3b8;line-height:1.6}
+@media(max-width:650px){.guide-grid{grid-template-columns:1fr}}
+@media(max-width:650px){
+  .site-header{align-items:flex-start;gap:15px;flex-direction:column}
+  .site-header nav{gap:12px;flex-wrap:wrap}
+  .hero h1{font-size:30px}
+  .info-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="site-header">
+    <div class="brand">⚡ InstaTone</div>
+    <nav aria-label="Main navigation">
+      <a href="#maker">Maker</a>
+      <a href="#how-it-works">How It Works</a>
+            <a href="#faq">FAQ</a>
+      <a href="#privacy">Privacy</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="maker">
+    <h1>Free Ringtone Maker</h1>
+    <p>Create a custom MP3 ringtone from an audio or video file. Trim the exact section you want, preview it, and download it.</p>
+  </section>
+  <div class="subtitle">Simple Ringtone Maker</div>
+
+  <div class="card" id="maker-card">
+    <div class="tabs">
+      <button class="tab active" data-tab="upload">📁 Upload File</button>
+      <button class="tab" data-tab="url">🔗 URL</button>
+    </div>
+
+    <div id="upload" class="panel active">
+      <label>Select Audio / Video</label>
+      <div class="drop" id="dropZone">
+        <div>Choose an audio or video file</div>
+        <input id="fileInput" type="file"
+          accept=".mp3,.wav,.m4a,.aac,.mp4,.mov,.webm,.mkv,audio/*,video/*">
+      </div>
+      <button class="main" id="uploadCreate">Create Ringtone</button>
+    </div>
+
+    <div id="url" class="panel">
+      <label>Media URL</label>
+      <input id="mediaUrl" type="text"
+        placeholder="Paste YouTube / Instagram / other supported URL">
+      <button class="main" id="loadUrl">Load Media</button>
+      <button class="main" id="urlCreate">Create Ringtone From URL</button>
+    </div>
+
+    <div class="preview" id="previewCard">
+      <strong>Audio Selection</strong>
+      <audio id="audioPreview" controls></audio>
+
+      <div class="wave" id="waveContainer">
+        <canvas id="waveform"></canvas>
+        <div class="selection" id="selection"></div>
+        <div class="handle" id="startHandle"></div>
+        <div class="handle" id="endHandle"></div>
+      </div>
+
+      <div class="times">
+        <div class="time"><small>START</small><b id="previewStart">00:00.0</b></div>
+        <div class="time"><small>END</small><b id="previewEnd">00:30.0</b></div>
+        <div class="time"><small>DURATION</small><b id="previewDuration">00:30.0</b></div>
+      </div>
+    </div>
+
+    <div class="result" id="result"></div>
+  </div>
+</div>
+
+
+<section class="info-section" id="how-it-works">
+  <h2>How InstaTone Works</h2>
+  <div class="info-grid">
+    <div><strong>1. Upload</strong><p>Select an audio or video file.</p></div>
+    <div><strong>2. Select</strong><p>Choose the exact part you want as your ringtone.</p></div>
+    <div><strong>3. Create</strong><p>InstaTone converts the selection into an MP3 ringtone.</p></div>
+    <div><strong>4. Download</strong><p>Download the generated ringtone to your device.</p></div>
+  </div>
+  <p class="legal-note">Use only media that you own or are authorized to use.</p>
+</section>
+
+<section class="info-section" id="faq">
+  <h2>Frequently Asked Questions</h2>
+  <details>
+    <summary>What files can I use?</summary>
+    <p>InstaTone supports common audio and video formats such as MP3, WAV, M4A, AAC, MP4, MOV, WEBM and MKV.</p>
+  </details>
+  <details>
+    <summary>Can I choose the ringtone section?</summary>
+    <p>Yes. Use the waveform selection handles to choose the start and end of the ringtone.</p>
+  </details>
+  <details>
+    <summary>What format is the result?</summary>
+    <p>The current ringtone output is MP3.</p>
+  </details>
+  <details>
+    <summary>Can I use copyrighted music?</summary>
+    <p>Only when you have the necessary rights or authorization to use the media.</p>
+  </details>
+</section>
+
+<section class="info-section" id="guides">
+  <h2>Ringtone Guides</h2>
+  <div class="guide-grid">
+    <article class="guide-card"><h3>Make a ringtone from MP3</h3><p>Upload your MP3, choose the section you want with the waveform, create the ringtone, and download the resulting MP3.</p></article>
+    <article class="guide-card"><h3>Cut audio for a ringtone</h3><p>Use the start and end handles to isolate the useful part of a song, voice recording, or other audio file before creating the ringtone.</p></article>
+    <article class="guide-card"><h3>Ringtone from video</h3><p>Upload a supported video file when you have permission to use its audio. InstaTone extracts the audio section you select and creates an MP3.</p></article>
+  </div>
+</section>
+
+<section class="info-section" id="privacy">
+  <h2>Privacy Policy</h2>
+  <p class="legal-note">Last updated: September 2026</p>
+  <details open><summary>File processing</summary><p>Files submitted to the ringtone tool may be temporarily stored on the server while they are processed. The production retention and deletion period should be configured to match the actual server implementation before this page is published as a final legal policy.</p></details>
+  <details><summary>Information we collect</summary><p>Do not claim collection of analytics, cookies, account information, or contact details unless those features are actually enabled on the deployed website.</p></details>
+  <details><summary>Your responsibility</summary><p>Only upload or process media that you own or are authorized to use.</p></details>
+</section>
+
+<section class="info-section" id="terms">
+  <h2>Terms &amp; Conditions</h2>
+  <p>By using InstaTone, you agree to use the service only for lawful purposes and only with media you are authorized to process.</p>
+  <p>The service is provided on an as-is basis. Availability, supported formats, processing limits, and features may change as the service develops.</p>
+  <p class="legal-note">This page is a starter template and should be reviewed and customized before commercial launch.</p>
+</section>
+
+<section class="info-section" id="contact">
+  <h2>Contact</h2>
+  <div class="contact-box">For support, feedback, or business enquiries, add your real support email address here before publishing the website.<br><br><strong>Support email:</strong> YOUR-EMAIL@YOUR-DOMAIN.COM</div>
+</section>
+
+<footer class="site-footer">
+  <span>© 2026 InstaTone</span>
+  <span>Free Ringtone Maker</span>
+  <span><a href="#maker">Maker</a><a href="#guides">Guides</a><a href="#faq">FAQ</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a><a href="#contact">Contact</a></span>
+</footer>
+
+<script>
+const audio=document.getElementById("audioPreview");
+const fileInput=document.getElementById("fileInput");
+const dropZone=document.getElementById("dropZone");
+const wave=document.getElementById("waveContainer");
+const canvas=document.getElementById("waveform");
+const selection=document.getElementById("selection");
+const startHandle=document.getElementById("startHandle");
+const endHandle=document.getElementById("endHandle");
+const previewCard=document.getElementById("previewCard");
+const result=document.getElementById("result");
+
+let selectedFile=null, previewFilename=null, currentUrl="";
+let audioDuration=0,startTime=0,endTime=30,dragging=null;
+
+function fmt(v){
+  v=Math.max(0,Number(v)||0);
+  return String(Math.floor(v/60)).padStart(2,"0")+":"+((v%60).toFixed(1)).padStart(4,"0");
+}
+function show(msg,ok=false,url=""){
+  result.className="result show";
+  result.innerHTML=ok
+    ? `<div class="success">✓ ${msg}</div><a class="download" href="${url}" download>Download MP3</a>`
+    : `<div class="error">⚠ ${msg}</div>`;
+}
+function updateUI(){
+  if(!audioDuration)return;
+  startTime=Math.max(0,Math.min(startTime,audioDuration-.1));
+  endTime=Math.max(startTime+.1,Math.min(endTime,audioDuration));
+  const l=startTime/audioDuration*100,r=endTime/audioDuration*100;
+  selection.style.left=l+"%";selection.style.width=(r-l)+"%";
+  startHandle.style.left=l+"%";endHandle.style.left=r+"%";
+  document.getElementById("previewStart").textContent=fmt(startTime);
+  document.getElementById("previewEnd").textContent=fmt(endTime);
+  document.getElementById("previewDuration").textContent=fmt(endTime-startTime);
+}
+function drawWave(samples){
+  const dpr=devicePixelRatio||1,r=wave.getBoundingClientRect();
+  canvas.width=r.width*dpr;canvas.height=r.height*dpr;
+  const ctx=canvas.getContext("2d");ctx.setTransform(dpr,0,0,dpr,0,0);
+  const w=r.width,h=r.height,mid=h/2;
+  ctx.clearRect(0,0,w,h);
+  ctx.strokeStyle="#60a5fa";ctx.lineWidth=2;ctx.beginPath();
+  const step=Math.max(1,Math.ceil(samples.length/w));
+  for(let x=0;x<w;x++){
+    let a=samples[Math.min(samples.length-1,x*step)]||0;
+    ctx.moveTo(x,mid-a*h*.42);ctx.lineTo(x,mid+a*h*.42);
+  }
+  ctx.stroke();
+}
+async function loadWave(src){
+  try{
+    const res=await fetch(src);if(!res.ok)throw new Error("preview failed");
+    const buf=await res.arrayBuffer();
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const decoded=await ctx.decodeAudioData(buf);
+    audioDuration=decoded.duration;
+    const raw=decoded.getChannelData(0), n=500;
+    const samples=new Float32Array(n), block=Math.max(1,Math.floor(raw.length/n));
+    for(let i=0;i<n;i++){
+      let sum=0,end=Math.min(raw.length,(i+1)*block);
+      for(let j=i*block;j<end;j++)sum+=Math.abs(raw[j]);
+      samples[i]=sum/Math.max(1,end-i*block);
+    }
+    drawWave(samples);updateUI();
+    try{await ctx.close()}catch(e){}
+  }catch(e){
+    audioDuration=Number.isFinite(audio.duration)&&audio.duration>0?audio.duration:30;
+    drawWave(new Float32Array(500).map(()=>.15+Math.random()*.65));
+    updateUI();
+  }
+}
+function selectFile(file){
+  if(!file)return;
+  selectedFile=file;previewFilename=null;
+  currentUrl=URL.createObjectURL(file);
+  previewCard.classList.add("show");
+  audio.src=currentUrl;audio.load();
+  startTime=0;endTime=30;
+  loadWave(currentUrl);
+  show("READY — "+file.name);
+}
+fileInput.addEventListener("change",e=>selectFile(e.target.files[0]));
+dropZone.addEventListener("dragover",e=>{e.preventDefault();dropZone.style.borderColor="#3b82f6"});
+dropZone.addEventListener("dragleave",()=>dropZone.style.borderColor="#33405d");
+dropZone.addEventListener("drop",e=>{
+  e.preventDefault();dropZone.style.borderColor="#33405d";
+  selectFile(e.dataTransfer.files[0]);
+});
+audio.addEventListener("loadedmetadata",()=>{
+  if(audio.duration>0){
+    audioDuration=audio.duration;
+    endTime=Math.min(30,audioDuration);
+    updateUI();
+  }
+});
+
+function xTime(x){
+  const r=wave.getBoundingClientRect();
+  return Math.max(0,Math.min(audioDuration,(x-r.left)/r.width*audioDuration));
+}
+startHandle.addEventListener("pointerdown",e=>{dragging="start";e.preventDefault()});
+endHandle.addEventListener("pointerdown",e=>{dragging="end";e.preventDefault()});
+window.addEventListener("pointermove",e=>{
+  if(!dragging||!audioDuration)return;
+  const t=xTime(e.clientX);
+  if(dragging==="start")startTime=Math.min(t,endTime-.1);
+  else endTime=Math.max(t,startTime+.1);
+  updateUI();
+});
+window.addEventListener("pointerup",()=>dragging=null);
+
+document.querySelectorAll(".tab").forEach(tab=>{
+  tab.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+    tab.classList.add("active");
+    document.getElementById(tab.dataset.tab).classList.add("active");
+  });
+});
+
+document.getElementById("uploadCreate").addEventListener("click",async()=>{
+  if(!selectedFile){show("Choose an audio/video file first.");return}
+  const btn=document.getElementById("uploadCreate");btn.disabled=true;btn.textContent="Processing...";
+  try{
+    const fd=new FormData();
+    fd.append("file",selectedFile);
+    fd.append("start",startTime);
+    fd.append("duration",Math.max(.1,endTime-startTime));
+    const res=await fetch("/create-ringtone",{method:"POST",body:fd});
+    const data=await res.json();
+    if(!res.ok||!data.success)throw new Error(data.error||"Ringtone creation failed");
+    show("RINGTONE CREATED",true,"/download/"+encodeURIComponent(data.filename));
+  }catch(e){show(e.message||"Server connection error")}
+  finally{btn.disabled=false;btn.textContent="Create Ringtone"}
+});
+
+document.getElementById("loadUrl").addEventListener("click",async()=>{
+  const url=document.getElementById("mediaUrl").value.trim();
+  if(!url){show("Paste a URL first.");return}
+  const btn=document.getElementById("loadUrl");btn.disabled=true;btn.textContent="Loading...";
+  try{
+    const fd=new FormData();fd.append("url",url);
+    const res=await fetch("/preview-from-url",{method:"POST",body:fd});
+    const data=await res.json();
+    if(!res.ok||!data.success)throw new Error(data.error||"Could not load URL");
+    previewFilename=data.filename;
+    currentUrl="/preview/"+encodeURIComponent(previewFilename);
+    previewCard.classList.add("show");
+    audio.src=currentUrl;audio.load();
+    startTime=0;endTime=30;
+    await loadWave(currentUrl);
+    show("MEDIA LOADED — select the ringtone section.");
+  }catch(e){show(e.message||"Server connection error")}
+  finally{btn.disabled=false;btn.textContent="Load Media"}
+});
+
+document.getElementById("urlCreate").addEventListener("click",async()=>{
+  const url=document.getElementById("mediaUrl").value.trim();
+  if(!url){show("Paste a URL first.");return}
+  if(!previewFilename){show("Load the URL first.");return}
+  const btn=document.getElementById("urlCreate");btn.disabled=true;btn.textContent="Processing...";
+  try{
+    const fd=new FormData();
+    fd.append("url",url);
+    fd.append("start",startTime);
+    fd.append("duration",Math.max(.1,endTime-startTime));
+    fd.append("preview_filename",previewFilename);
+    const res=await fetch("/create-from-url",{method:"POST",body:fd});
+    const data=await res.json();
+    if(!res.ok||!data.success)throw new Error(data.error||"Ringtone creation failed");
+    show("RINGTONE CREATED",true,"/download/"+encodeURIComponent(data.filename));
+  }catch(e){show(e.message||"Server connection error")}
+  finally{btn.disabled=false;btn.textContent="Create Ringtone From URL"}
+});
+</script>
+</body>
+</html>
