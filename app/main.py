@@ -62,6 +62,14 @@ def detect_platform(url: str) -> str:
         return "Unknown"
 
 
+@app.get("/googlead5e816e80705d3c.html")
+async def google_verification():
+    return FileResponse(
+        str(Path(__file__).resolve().parent / "templates" / "googlead5e816e80705d3c.html"),
+        media_type="text/html"
+    )
+
+
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse(
