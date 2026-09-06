@@ -64,9 +64,8 @@ def detect_platform(url: str) -> str:
 
 @app.get("/googlead5e816e80705d3c.html")
 async def google_verification():
-    return FileResponse(
-        str(Path(__file__).resolve().parent / "templates" / "googlead5e816e80705d3c.html"),
-        media_type="text/html"
+    return PlainTextResponse(
+        "google-site-verification: googlead5e816e80705d3c.html"
     )
 
 
