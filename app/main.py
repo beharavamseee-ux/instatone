@@ -300,6 +300,9 @@ async def preview_from_url(
 
         "--no-playlist",
 
+        "--extractor-args",
+        "youtube:player_client=android",
+
         "-f",
         "bestaudio/best",
 
@@ -518,6 +521,9 @@ async def create_from_url(
             "yt-dlp",
 
             "--no-playlist",
+
+            "--extractor-args",
+            "youtube:player_client=android",
 
             "-f",
             "bestaudio/best",
