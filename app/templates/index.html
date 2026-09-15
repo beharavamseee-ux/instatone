@@ -712,7 +712,18 @@ function showResult(msg, ok=false, downloadUrl="", filename="", format="mp3"){
     `;
     adResult.style.display = "flex";
   } else {
-    result.innerHTML = `<div class="error">⚠ ${msg}</div>`;
+    let extraAction = "";
+    if(msg.includes("YouTube requires login") || msg.includes("bot") || msg.includes("authentication")){
+      extraAction = `
+        <div style="margin-top:10px;font-size:13px;color:#cbd5e1;line-height:1.5">
+          💡 <b>Tip:</b> YouTube frequently blocks automated cloud servers from fetching media directly. 
+          You can download the video/audio onto your phone or computer first, then click 
+          <a href="javascript:void(0)" onclick="document.querySelector('[data-tab=upload]').click()" style="color:#60a5fa;font-weight:bold;text-decoration:underline">📁 Upload File</a> 
+          above to trim and convert it instantly without any restrictions!
+        </div>
+      `;
+    }
+    result.innerHTML = `<div class="error">⚠ ${msg}</div>${extraAction}`;
   }
   result.scrollIntoView({behavior:"smooth", block:"nearest"});
 }
