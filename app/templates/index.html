@@ -4,500 +4,1020 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7341694310383704"
-     crossorigin="anonymous"></script>
+<!-- 
+  MONETIZATION NOTICE:
+  To monetize for free without spending money on domains or waiting for AdSense approval:
+  1. Sign up for free on Monetag (https://monetag.com) or Adsterra (https://adsterra.com).
+  2. Create a "Banner" or "In-Page Push" or "Vignette" ad unit.
+  3. Paste your generated script tag directly below or inside the .ad-banner containers!
+-->
+<!-- MONETAG / ADSTERRA HEADER SCRIPT GOES HERE -->
 
-<title>InstaTone — Free Ringtone Maker</title>
-<meta name="description" content="InstaTone is a simple ringtone maker for creating MP3 ringtones from audio and video files. Trim your media and download your ringtone.">
-<meta name="keywords" content="ringtone maker, MP3 ringtone maker, audio cutter, ringtone creator">
+<title>InstaTone — Free Ringtone Maker | MP3 & iPhone M4R Cutter</title>
+<meta name="description" content="Free online ringtone maker. Cut and trim local audio, video, or media URLs into custom MP3 ringtones for Android or M4R for iPhone with smooth fade effects.">
+<meta name="keywords" content="ringtone maker, iPhone ringtone maker, m4r cutter, mp3 cutter, free audio trimmer, custom ringtones">
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="InstaTone — Free Ringtone Maker">
-<meta property="og:description" content="Create a ringtone from your audio or video file with InstaTone.">
+<meta property="og:description" content="Create custom MP3 and iPhone M4R ringtones from audio, video, or media links.">
 <meta property="og:type" content="website">
 
 <style>
 *{box-sizing:border-box}
 body{
-  margin:0;font-family:Segoe UI,Arial,sans-serif;
-  background:#0b1020;color:#fff;min-height:100vh;
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#090d1a;
+  color:#f1f5f9;
+  min-height:100vh;
+  line-height:1.5;
 }
-.container{width:min(760px,92%);margin:45px auto}
-h1{text-align:center;margin:0;font-size:38px}
-.subtitle{text-align:center;color:#94a3b8;margin:8px 0 30px}
+.container{
+  width:min(780px,94%);
+  margin:30px auto;
+}
+a{color:#60a5fa;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Ad Banners */
+.ad-slot{
+  width:100%;
+  margin:18px 0;
+  padding:12px;
+  background:#0e1629;
+  border:1px dashed #263554;
+  border-radius:12px;
+  text-align:center;
+  color:#64748b;
+  font-size:12px;
+  min-height:50px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* Header */
+.site-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
+  padding:8px 0;
+}
+.brand{
+  font-weight:800;
+  font-size:22px;
+  letter-spacing:-0.5px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.brand span{
+  background:linear-gradient(135deg,#38bdf8,#818cf8);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.site-header nav{display:flex;gap:18px}
+.site-header nav a{color:#94a3b8;font-size:14px;font-weight:500}
+.site-header nav a:hover{color:#fff}
+
+/* Hero */
+.hero{text-align:center;margin-bottom:22px}
+.hero h1{
+  margin:0;
+  font-size:36px;
+  font-weight:800;
+  letter-spacing:-0.5px;
+}
+.hero p{
+  max-width:620px;
+  margin:10px auto 0;
+  color:#94a3b8;
+  font-size:15px;
+}
+
+/* Card */
 .card{
-  background:#151c2e;border:1px solid #29334d;border-radius:18px;
-  padding:25px;box-shadow:0 15px 40px rgba(0,0,0,.35)
+  background:#131b2e;
+  border:1px solid #23304d;
+  border-radius:20px;
+  padding:26px;
+  box-shadow:0 20px 45px rgba(0,0,0,.45);
 }
-.tabs{display:flex;gap:8px;margin-bottom:22px}
+.tabs{display:flex;gap:10px;margin-bottom:20px}
 .tab{
-  flex:1;padding:13px;border:1px solid #33405d;background:#101727;
-  color:#9fb0ca;border-radius:10px;cursor:pointer;font-size:15px
+  flex:1;
+  padding:13px;
+  border:1px solid #2a395c;
+  background:#0d1424;
+  color:#94a3b8;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:600;
+  transition:all .2s ease;
 }
-.tab.active{background:#2563eb;color:#fff;border-color:#3b82f6}
-.panel{display:none}.panel.active{display:block}
-label{display:block;margin:0 0 8px;color:#b9c7dc;font-weight:600}
-input[type=file],input[type=text]{
-  width:100%;padding:14px;background:#0d1424;border:1px solid #33405d;
-  color:#fff;border-radius:10px
+.tab.active{
+  background:#2563eb;
+  color:#fff;
+  border-color:#3b82f6;
+  box-shadow:0 4px 14px rgba(37,99,235,.35);
 }
-input:focus{outline:none;border-color:#3b82f6}
+.panel{display:none}
+.panel.active{display:block}
+
+label.field-label{
+  display:block;
+  margin:0 0 8px;
+  color:#cbd5e1;
+  font-size:14px;
+  font-weight:600;
+}
+input[type=file],input[type=text],input[type=number],select{
+  width:100%;
+  padding:13px 15px;
+  background:#0a101d;
+  border:1px solid #283754;
+  color:#fff;
+  border-radius:10px;
+  font-size:14px;
+}
+input:focus,select:focus{
+  outline:none;
+  border-color:#3b82f6;
+  box-shadow:0 0 0 3px rgba(59,130,246,.2);
+}
+
 .drop{
-  border:2px dashed #33405d;border-radius:12px;padding:25px;text-align:center;
-  cursor:pointer;background:#101727
+  border:2px dashed #33446b;
+  border-radius:14px;
+  padding:30px 20px;
+  text-align:center;
+  cursor:pointer;
+  background:#0a101d;
+  transition:border-color .2s;
 }
 .drop:hover{border-color:#3b82f6}
-.drop input{margin-top:12px}
-button.main{
-  width:100%;margin-top:16px;padding:14px;border:0;border-radius:10px;
-  background:#2563eb;color:#fff;font-size:16px;font-weight:700;cursor:pointer
+.drop-icon{font-size:32px;margin-bottom:8px}
+.drop-text{font-weight:600;color:#e2e8f0;margin-bottom:4px}
+.drop-sub{font-size:12px;color:#64748b}
+.drop input{display:none}
+
+.url-input-wrap{
+  display:flex;
+  gap:10px;
 }
-button.main:hover{background:#1d4ed8}
-button:disabled{opacity:.6;cursor:not-allowed}
+@media(max-width:580px){
+  .url-input-wrap{flex-direction:column}
+}
+.btn-fetch{
+  white-space:nowrap;
+  padding:13px 22px;
+  background:#3b82f6;
+  border:0;
+  border-radius:10px;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  font-size:14px;
+  transition:background .2s;
+}
+.btn-fetch:hover{background:#2563eb}
+
+/* Preview & Trimming */
 .preview{
-  display:none;margin-top:25px;padding:20px;background:#0e1525;
-  border:1px solid #293852;border-radius:14px
+  display:none;
+  margin-top:22px;
+  padding:22px;
+  background:#0a101d;
+  border:1px solid #23314f;
+  border-radius:16px;
 }
 .preview.show{display:block}
-audio{width:100%;margin-bottom:15px}
+
+.preview-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.preview-title{
+  font-weight:700;
+  font-size:15px;
+  color:#93c5fd;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+audio{width:100%;margin-bottom:16px;outline:none}
+
 .wave{
-  height:130px;background:#09101d;border:1px solid #26344e;
-  border-radius:10px;position:relative;overflow:hidden;touch-action:none
+  height:130px;
+  background:#060a12;
+  border:1px solid #1e2c47;
+  border-radius:10px;
+  position:relative;
+  overflow:hidden;
+  touch-action:none;
+  cursor:crosshair;
 }
 canvas{width:100%;height:100%;display:block}
+
 .selection{
-  position:absolute;top:0;bottom:0;background:rgba(37,99,235,.25);
-  border-left:2px solid #60a5fa;border-right:2px solid #60a5fa;
-  pointer-events:none
+  position:absolute;
+  top:0;
+  bottom:0;
+  background:rgba(37,99,235,.28);
+  border-left:2px solid #60a5fa;
+  border-right:2px solid #60a5fa;
+  pointer-events:none;
 }
 .handle{
-  position:absolute;top:0;bottom:0;width:20px;transform:translateX(-50%);
-  cursor:ew-resize;z-index:3
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:26px;
+  transform:translateX(-50%);
+  cursor:ew-resize;
+  z-index:4;
+  touch-action:none;
 }
 .handle:after{
-  content:"";position:absolute;left:50%;top:15px;bottom:15px;width:4px;
-  transform:translateX(-50%);background:#fff;border-radius:4px
+  content:"";
+  position:absolute;
+  left:50%;
+  top:12px;
+  bottom:12px;
+  width:4px;
+  transform:translateX(-50%);
+  background:#fff;
+  border-radius:4px;
+  box-shadow:0 0 6px rgba(0,0,0,.6);
 }
-.times{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-.time{background:#151f32;padding:12px;border-radius:9px;text-align:center}
-.time small{display:block;color:#8290a8;font-size:11px;margin-bottom:5px}
-.time b{color:#60a5fa;font-family:Consolas,monospace}
+.playhead{
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:#ef4444;
+  pointer-events:none;
+  z-index:3;
+  display:none;
+}
+
+/* Quick Presets & Precision Inputs */
+.trim-controls{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+  margin-top:16px;
+}
+.time-box{
+  background:#131b2e;
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #23304d;
+}
+.time-box label{
+  display:block;
+  font-size:11px;
+  color:#64748b;
+  font-weight:700;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.time-box input{
+  background:transparent;
+  border:0;
+  padding:0;
+  font-family:Consolas,monospace;
+  font-size:16px;
+  font-weight:700;
+  color:#60a5fa;
+  width:100%;
+}
+.time-box span.dur-val{
+  font-family:Consolas,monospace;
+  font-size:16px;
+  font-weight:700;
+  color:#34d399;
+  display:block;
+  margin-top:2px;
+}
+
+.presets{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.preset-btn{
+  background:#131b2e;
+  border:1px solid #2b3957;
+  color:#94a3b8;
+  padding:6px 12px;
+  border-radius:8px;
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+}
+.preset-btn:hover{background:#1d2842;color:#fff}
+
+/* Options Grid */
+.options-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid #1e2c47;
+}
+.effect-group{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.checkbox-label{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:13px;
+  color:#cbd5e1;
+  cursor:pointer;
+  font-weight:500;
+}
+.checkbox-label input[type=checkbox]{
+  width:16px;
+  height:16px;
+  accent-color:#2563eb;
+  cursor:pointer;
+}
+
+button.main{
+  width:100%;
+  margin-top:20px;
+  padding:15px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(135deg,#2563eb,#1d4ed8);
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 4px 18px rgba(37,99,235,.35);
+  transition:all .2s;
+}
+button.main:hover{
+  background:linear-gradient(135deg,#1d4ed8,#1e40af);
+  transform:translateY(-1px);
+}
+button:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
 .result{
-  display:none;margin-top:20px;padding:15px;border-radius:10px;
-  background:#101a2a;border:1px solid #33405d
+  display:none;
+  margin-top:20px;
+  padding:18px;
+  border-radius:12px;
+  background:#0d1829;
+  border:1px solid #1f3559;
 }
 .result.show{display:block}
-.success{color:#34d399;font-weight:700}
-.error{color:#fb7185;font-weight:700}
-.download{
-  display:inline-block;margin-top:12px;padding:11px 17px;
-  background:#22c55e;color:#06120b;text-decoration:none;border-radius:8px;
-  font-weight:700
+.success{color:#34d399;font-weight:700;font-size:15px}
+.error{color:#fb7185;font-weight:700;font-size:14px}
+.download-group{
+  margin-top:14px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
 }
-@media(max-width:600px){.times{grid-template-columns:1fr}.container{margin:25px auto}}
+.download{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:12px 22px;
+  background:#22c55e;
+  color:#04140a;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:800;
+  font-size:14px;
+  transition:background .2s;
+}
+.download:hover{background:#16a34a;text-decoration:none}
+.ios-tip{
+  margin-top:10px;
+  font-size:12px;
+  color:#94a3b8;
+  line-height:1.5;
+  background:#09101d;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #1e2c47;
+}
 
-.site-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;padding:12px 2px}
-.brand{font-weight:800;font-size:20px}
-.site-header nav{display:flex;gap:18px}
-.site-header nav a{color:#94a3b8;text-decoration:none;font-size:13px}
-.site-header nav a:hover{color:#fff}
-.hero{text-align:center;margin-bottom:24px}
-.hero h1{margin:0;font-size:36px}
-.hero p{max-width:680px;margin:10px auto 0;color:#94a3b8;line-height:1.6}
-.info-section{margin-top:28px;background:#151c2e;border:1px solid #29334d;border-radius:18px;padding:24px}
-.info-section h2{margin-top:0}
-.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.info-grid>div{background:#101727;border:1px solid #293852;border-radius:10px;padding:15px}
-.info-grid p,.info-section details p{color:#94a3b8;line-height:1.5;font-size:13px}
-.info-section details{border-top:1px solid #293852;padding:13px 0}
-.info-section summary{cursor:pointer;font-weight:700}
-.legal-note{color:#71809a;font-size:12px;margin-bottom:0}
-.site-footer{display:flex;justify-content:space-between;color:#64748b;font-size:12px;padding:24px 4px 40px;gap:15px;flex-wrap:wrap}
-.site-footer a{color:#94a3b8;text-decoration:none;margin-left:14px}.site-footer a:hover{color:#fff}
-.contact-box{background:#101727;border:1px solid #293852;border-radius:10px;padding:18px;color:#94a3b8;line-height:1.6}
-@media(max-width:650px){
-  .site-header{align-items:flex-start;gap:15px;flex-direction:column}
-  .site-header nav{gap:12px;flex-wrap:wrap}
-  .hero h1{font-size:30px}
+/* Info Sections */
+.info-section{
+  margin-top:30px;
+  background:#131b2e;
+  border:1px solid #23304d;
+  border-radius:18px;
+  padding:24px;
+}
+.info-section h2{margin-top:0;font-size:22px}
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.info-grid>div{
+  background:#0a101d;
+  border:1px solid #1e2c47;
+  border-radius:12px;
+  padding:16px;
+}
+.info-grid p,.info-section details p{
+  color:#94a3b8;
+  line-height:1.5;
+  font-size:13px;
+  margin-bottom:0;
+}
+.info-section details{
+  border-top:1px solid #1e2c47;
+  padding:14px 0;
+}
+.info-section summary{
+  cursor:pointer;
+  font-weight:700;
+  color:#e2e8f0;
+}
+.legal-note{color:#64748b;font-size:12px;margin-bottom:0}
+
+/* Footer */
+.site-footer{
+  display:flex;
+  justify-content:space-between;
+  color:#64748b;
+  font-size:13px;
+  padding:28px 4px 40px;
+  gap:15px;
+  flex-wrap:wrap;
+}
+.site-footer a{color:#94a3b8;margin-left:14px}
+.site-footer a:hover{color:#fff}
+
+@media(max-width:640px){
+  .trim-controls{grid-template-columns:1fr}
+  .options-grid{grid-template-columns:1fr}
   .info-grid{grid-template-columns:1fr 1fr}
+  .site-header{flex-direction:column;align-items:flex-start;gap:12px}
+  .hero h1{font-size:28px}
 }
 </style>
 </head>
 <body>
 <div class="container">
+
+  <!-- TOP AD BANNER (Free monetization ready: Monetag / Adsterra) -->
+  <div class="ad-slot" id="ad-top">
+    <!-- Paste your Monetag or Adsterra 728x90 or responsive banner code here -->
+    <span>Advertisement</span>
+  </div>
+
   <header class="site-header">
-    <div class="brand">⚡ InstaTone</div>
+    <div class="brand">⚡ <span>InstaTone</span></div>
     <nav aria-label="Main navigation">
       <a href="#maker">Maker</a>
-      <a href="#how-it-works">How It Works</a>
-            <a href="#faq">FAQ</a>
-      <a href="#privacy">Privacy</a>
+      <a href="/faq">FAQ</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="/contact">Contact</a>
     </nav>
   </header>
 
   <section class="hero" id="maker">
     <h1>Free Ringtone Maker</h1>
-    <p>Create a custom MP3 ringtone from an audio or video file. Trim the exact section you want, preview it, and download it.</p>
+    <p>Upload a file or paste a video/audio link. Trim the exact audio section and export as MP3 (Android/PC) or M4R (iPhone) with smooth fade effects.</p>
   </section>
-  <div class="subtitle">Simple Ringtone Maker</div>
 
   <div class="card" id="maker-card">
     <div class="tabs">
       <button class="tab active" data-tab="upload">📁 Upload File</button>
-      <button class="tab" data-tab="url">🔗 URL</button>
+      <button class="tab" data-tab="url">🔗 Media URL</button>
     </div>
 
+    <!-- Upload Panel -->
     <div id="upload" class="panel active">
-      <label>Select Audio / Video</label>
+      <label class="field-label">Select Audio or Video</label>
       <div class="drop" id="dropZone">
-        <div>Choose an audio or video file</div>
-        <input id="fileInput" type="file"
-          accept=".mp3,.wav,.m4a,.aac,.mp4,.mov,.webm,.mkv,audio/*,video/*">
+        <div class="drop-icon">🎵</div>
+        <div class="drop-text">Drop your media here, or <span style="color:#60a5fa">browse</span></div>
+        <div class="drop-sub">MP3, WAV, M4A, AAC, MP4, MOV, WEBM, MKV (Up to 100MB)</div>
+        <input id="fileInput" type="file" accept=".mp3,.wav,.m4a,.aac,.mp4,.mov,.webm,.mkv,audio/*,video/*">
       </div>
-      <button class="main" id="uploadCreate">Create Ringtone</button>
     </div>
 
+    <!-- URL Panel -->
     <div id="url" class="panel">
-      <label>Media URL</label>
-      <input id="mediaUrl" type="text"
-        placeholder="Paste YouTube / Instagram / other supported URL">
-      <button class="main" id="loadUrl">Load Media</button>
-      <button class="main" id="urlCreate">Create Ringtone From URL</button>
+      <label class="field-label">Paste Media URL</label>
+      <div class="url-input-wrap">
+        <input id="mediaUrl" type="text" placeholder="https://www.youtube.com/... or Instagram / TikTok link">
+        <button class="btn-fetch" id="loadUrl">⚡ Load Media</button>
+      </div>
+      <div style="font-size:12px;color:#64748b;margin-top:8px">Supports YouTube, Instagram, TikTok, Facebook, Vimeo, and direct media links.</div>
     </div>
 
+    <!-- Trimming & Waveform Preview Card -->
     <div class="preview" id="previewCard">
-      <strong>Audio Selection</strong>
+      <div class="preview-header">
+        <div class="preview-title">
+          <span>✂️ Select Ringtone Section</span>
+          <span id="previewSourceName" style="font-weight:400;color:#94a3b8;font-size:12px"></span>
+        </div>
+        <div class="presets">
+          <span style="font-size:11px;color:#64748b;font-weight:700">PRESETS:</span>
+          <button type="button" class="preset-btn" data-sec="15">15s</button>
+          <button type="button" class="preset-btn" data-sec="30">30s</button>
+          <button type="button" class="preset-btn" data-sec="40">40s (iOS Max)</button>
+        </div>
+      </div>
+
       <audio id="audioPreview" controls></audio>
 
-      <div class="wave" id="waveContainer">
+      <!-- Waveform with interactive handles and playhead -->
+      <div class="wave" id="waveContainer" title="Drag handles to adjust or click to seek">
         <canvas id="waveform"></canvas>
         <div class="selection" id="selection"></div>
-        <div class="handle" id="startHandle"></div>
-        <div class="handle" id="endHandle"></div>
+        <div class="handle" id="startHandle" title="Drag start point"></div>
+        <div class="handle" id="endHandle" title="Drag end point"></div>
+        <div class="playhead" id="playhead"></div>
       </div>
 
-      <div class="times">
-        <div class="time"><small>START</small><b id="previewStart">00:00.0</b></div>
-        <div class="time"><small>END</small><b id="previewEnd">00:30.0</b></div>
-        <div class="time"><small>DURATION</small><b id="previewDuration">00:30.0</b></div>
+      <!-- Precision Timing Inputs -->
+      <div class="trim-controls">
+        <div class="time-box">
+          <label for="inputStart">Start Time (sec)</label>
+          <input type="number" id="inputStart" min="0" step="0.1" value="0.0">
+        </div>
+        <div class="time-box">
+          <label for="inputEnd">End Time (sec)</label>
+          <input type="number" id="inputEnd" min="0.1" step="0.1" value="30.0">
+        </div>
+        <div class="time-box">
+          <label>Duration</label>
+          <span class="dur-val" id="previewDuration">00:30.0</span>
+        </div>
       </div>
+
+      <!-- Ringtone Format & Audio Effects -->
+      <div class="options-grid">
+        <div>
+          <label class="field-label">Export Format</label>
+          <select id="formatSelect">
+            <option value="mp3" selected>MP3 — Android, Windows & Mac</option>
+            <option value="m4r">M4R — iPhone Ringtone (iOS)</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label">Audio Effects</label>
+          <div class="effect-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="fadeIn" checked> Fade In (1.5s)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="fadeOut" checked> Fade Out (1.5s)
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unified Action Button -->
+      <button class="main" id="createRingtoneBtn">✂️ Generate Ringtone</button>
     </div>
 
+    <!-- Result / Download Area -->
     <div class="result" id="result"></div>
+
+    <!-- POST-RESULT AD SLOT -->
+    <div class="ad-slot" id="ad-result" style="display:none">
+      <!-- Paste your Monetag or Adsterra ad code here -->
+      <span>Sponsored Content</span>
+    </div>
+
   </div>
 </div>
 
-
-<section class="info-section" id="how-it-works">
+<!-- Explanatory Content for SEO -->
+<section class="container info-section" id="how-it-works">
   <h2>How InstaTone Works</h2>
   <div class="info-grid">
-    <div><strong>1. Upload</strong><p>Select an audio or video file.</p></div>
-    <div><strong>2. Select</strong><p>Choose the exact part you want as your ringtone.</p></div>
-    <div><strong>3. Create</strong><p>InstaTone converts the selection into an MP3 ringtone.</p></div>
-    <div><strong>4. Download</strong><p>Download the generated ringtone to your device.</p></div>
+    <div><strong>1. Choose Media</strong><p>Upload any audio/video file or paste a video URL from YouTube or Instagram.</p></div>
+    <div><strong>2. Select & Trim</strong><p>Use the visual waveform or precision inputs to isolate your favorite song hook.</p></div>
+    <div><strong>3. Choose Format</strong><p>Pick MP3 for Android/PC or native M4R with fade effects for iPhone ringtones.</p></div>
+    <div><strong>4. Download</strong><p>Get your optimized, high-fidelity ringtone instantly ready to set on your phone.</p></div>
   </div>
-  <p class="legal-note">Use only media that you own or are authorized to use.</p>
+  <p class="legal-note" style="margin-top:14px">Please only process media that you own or are authorized to use.</p>
 </section>
 
-<section class="info-section" id="faq">
+<section class="container info-section" id="faq-section">
   <h2>Frequently Asked Questions</h2>
   <details>
-    <summary>What files can I use?</summary>
-    <p>InstaTone supports common audio and video formats such as MP3, WAV, M4A, AAC, MP4, MOV, WEBM and MKV.</p>
+    <summary>How do I set an M4R ringtone on my iPhone?</summary>
+    <p>Download the M4R file. You can transfer it directly to your iPhone using Finder (Mac) or iTunes (Windows) under the "Tones" section, or save it to iCloud Files and set it via the free Apple GarageBand app.</p>
   </details>
   <details>
-    <summary>Can I choose the ringtone section?</summary>
-    <p>Yes. Use the waveform selection handles to choose the start and end of the ringtone.</p>
+    <summary>What is the maximum ringtone length for iPhone?</summary>
+    <p>Apple iOS restricts ringtones to a maximum duration of 40 seconds. InstaTone automatically enforces this limit when M4R format is selected.</p>
   </details>
   <details>
-    <summary>What format is the result?</summary>
-    <p>The current ringtone output is MP3.</p>
+    <summary>Why do fade in and fade out effects matter?</summary>
+    <p>Fading in and out softens the beginning and end of the audio, preventing abrupt clicks and harsh cutoff noises when an incoming call alerts you.</p>
   </details>
   <details>
-    <summary>Can I use copyrighted music?</summary>
-    <p>Only when you have the necessary rights or authorization to use the media.</p>
+    <summary>Is InstaTone completely free?</summary>
+    <p>Yes, 100% free with no registration, no hidden watermarks, and no limits on ringtone creations.</p>
   </details>
 </section>
 
-
-<section class="info-section" id="privacy">
-  <h2>Privacy Policy</h2>
-  <p class="legal-note">Last updated: September 2026</p>
-
-  <details open>
-    <summary>File processing</summary>
-    <p>
-      When you use the InstaTone ringtone maker, the audio or video file you
-      submit is transferred to our server for processing. Files may be
-      temporarily stored while your ringtone is being created.
-    </p>
-  </details>
-
-  <details>
-    <summary>Information we collect</summary>
-    <p>
-      InstaTone does not require you to create an account to use the ringtone
-      maker. We do not intentionally request personal information through
-      the ringtone creation tool.
-    </p>
-  </details>
-
-  <details>
-    <summary>Third-party services</summary>
-    <p>
-      InstaTone may use third-party services to operate, host, analyze, or
-      monetize the website. These services may process information according
-      to their own privacy policies.
-    </p>
-  </details>
-
-  <details>
-    <summary>Your responsibility</summary>
-    <p>
-      Only upload or process audio, video, or other media that you own or are
-      legally authorized to use.
-    </p>
-  </details>
-
-  <details>
-    <summary>Changes to this policy</summary>
-    <p>
-      This Privacy Policy may be updated when the website or its services
-      change. The latest version will be published on this page.
-    </p>
-  </details>
-</section>
-
-<section class="info-section" id="terms">
-  <h2>Terms &amp; Conditions</h2>
-
-  <p>
-    By using InstaTone, you agree to use the service only for lawful purposes
-    and in accordance with these Terms &amp; Conditions.
-  </p>
-
-  <details open>
-    <summary>Authorized media</summary>
-    <p>
-      You are responsible for ensuring that you own the media you upload or
-      have the necessary permission and rights to process it.
-    </p>
-  </details>
-
-  <details>
-    <summary>Prohibited use</summary>
-    <p>
-      You must not use InstaTone to process, reproduce, distribute, or
-      otherwise use content in a way that violates copyright, privacy,
-      intellectual property rights, or applicable law.
-    </p>
-  </details>
-
-  <details>
-    <summary>Service availability</summary>
-    <p>
-      InstaTone is provided on an as-is basis. Features, supported formats,
-      processing limits, and availability may change without notice.
-    </p>
-  </details>
-
-  <details>
-    <summary>Responsibility for uploaded content</summary>
-    <p>
-      You are solely responsible for the content you submit and for ensuring
-      that your use of InstaTone complies with applicable laws and the rights
-      of others.
-    </p>
-  </details>
-</section>
-
-
-<section class="info-section" id="contact">
-  <h2>Contact</h2>
-    For support, feedback, or business enquiries, please contact us by email.
-  <br><br>
-  <strong>Support email:</strong> pratyubehara3@gmail.com
-</section>
-
-<footer class="site-footer">
-  <span>© 2026 InstaTone</span>
-  <span>Free Ringtone Maker</span>
-  <span><a href="#maker">Maker</a><a href="#how-it-works">How It Works</a><a href="#faq">FAQ</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a><a href="#contact">Contact</a></span>
+<footer class="container site-footer">
+  <span>© 2026 InstaTone. Free Ringtone Maker.</span>
+  <span>
+    <a href="/faq">FAQ</a>
+    <a href="/about">About</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="/copyright">DMCA / Copyright</a>
+    <a href="/contact">Contact</a>
+  </span>
 </footer>
 
 <script>
-const audio=document.getElementById("audioPreview");
-const fileInput=document.getElementById("fileInput");
-const dropZone=document.getElementById("dropZone");
-const wave=document.getElementById("waveContainer");
-const canvas=document.getElementById("waveform");
-const selection=document.getElementById("selection");
-const startHandle=document.getElementById("startHandle");
-const endHandle=document.getElementById("endHandle");
-const previewCard=document.getElementById("previewCard");
-const result=document.getElementById("result");
+const audio = document.getElementById("audioPreview");
+const fileInput = document.getElementById("fileInput");
+const dropZone = document.getElementById("dropZone");
+const wave = document.getElementById("waveContainer");
+const canvas = document.getElementById("waveform");
+const selection = document.getElementById("selection");
+const startHandle = document.getElementById("startHandle");
+const endHandle = document.getElementById("endHandle");
+const playhead = document.getElementById("playhead");
+const previewCard = document.getElementById("previewCard");
+const result = document.getElementById("result");
+const adResult = document.getElementById("ad-result");
+const inputStart = document.getElementById("inputStart");
+const inputEnd = document.getElementById("inputEnd");
+const previewDuration = document.getElementById("previewDuration");
+const formatSelect = document.getElementById("formatSelect");
+const fadeInCheck = document.getElementById("fadeIn");
+const fadeOutCheck = document.getElementById("fadeOut");
+const createRingtoneBtn = document.getElementById("createRingtoneBtn");
+const previewSourceName = document.getElementById("previewSourceName");
 
-let selectedFile=null, previewFilename=null, currentUrl="";
-let audioDuration=0,startTime=0,endTime=30,dragging=null;
+let selectedFile = null;
+let previewFilename = null;
+let currentUrl = "";
+let currentSourceType = "upload"; // "upload" or "url"
+let audioDuration = 0;
+let startTime = 0;
+let endTime = 30;
+let dragging = null;
+let cachedSamples = null;
 
 function fmt(v){
-  v=Math.max(0,Number(v)||0);
-  return String(Math.floor(v/60)).padStart(2,"0")+":"+((v%60).toFixed(1)).padStart(4,"0");
+  v = Math.max(0, Number(v) || 0);
+  const m = Math.floor(v / 60);
+  const s = (v % 60).toFixed(1);
+  return String(m).padStart(2, "0") + ":" + s.padStart(4, "0");
 }
-function show(msg,ok=false,url=""){
-  result.className="result show";
-  result.innerHTML=ok
-    ? `<div class="success">✓ ${msg}</div><a class="download" href="${url}" download>Download MP3</a>`
-    : `<div class="error">⚠ ${msg}</div>`;
-}
-function updateUI(){
-  if(!audioDuration)return;
-  startTime=Math.max(0,Math.min(startTime,audioDuration-.1));
-  endTime=Math.max(startTime+.1,Math.min(endTime,audioDuration));
-  const l=startTime/audioDuration*100,r=endTime/audioDuration*100;
-  selection.style.left=l+"%";selection.style.width=(r-l)+"%";
-  startHandle.style.left=l+"%";endHandle.style.left=r+"%";
-  document.getElementById("previewStart").textContent=fmt(startTime);
-  document.getElementById("previewEnd").textContent=fmt(endTime);
-  document.getElementById("previewDuration").textContent=fmt(endTime-startTime);
-}
-function drawWave(samples){
-  const dpr=devicePixelRatio||1,r=wave.getBoundingClientRect();
-  canvas.width=r.width*dpr;canvas.height=r.height*dpr;
-  const ctx=canvas.getContext("2d");ctx.setTransform(dpr,0,0,dpr,0,0);
-  const w=r.width,h=r.height,mid=h/2;
-  ctx.clearRect(0,0,w,h);
-  ctx.strokeStyle="#60a5fa";ctx.lineWidth=2;ctx.beginPath();
-  const step=Math.max(1,Math.ceil(samples.length/w));
-  for(let x=0;x<w;x++){
-    let a=samples[Math.min(samples.length-1,x*step)]||0;
-    ctx.moveTo(x,mid-a*h*.42);ctx.lineTo(x,mid+a*h*.42);
+
+function showResult(msg, ok=false, downloadUrl="", filename="", format="mp3"){
+  result.className = "result show";
+  if(ok){
+    let iosNote = "";
+    if(format === "m4r"){
+      iosNote = `<div class="ios-tip">📱 <b>iPhone Tip:</b> You downloaded an Apple <b>.m4r</b> ringtone. To set it on iPhone without a computer, open it in <b>GarageBand</b> &gt; Share as Ringtone, or sync via Finder/iTunes.</div>`;
+    }
+    result.innerHTML = `
+      <div class="success">✓ ${msg}</div>
+      <div class="download-group">
+        <a class="download" href="${downloadUrl}" download="${filename}">⬇ Download ${format.toUpperCase()}</a>
+      </div>
+      ${iosNote}
+    `;
+    adResult.style.display = "flex";
+  } else {
+    result.innerHTML = `<div class="error">⚠ ${msg}</div>`;
   }
-  ctx.stroke();
+  result.scrollIntoView({behavior:"smooth", block:"nearest"});
 }
+
+function updateUI(fromInput = false){
+  if(!audioDuration) return;
+  const maxAllowed = formatSelect.value === "m4r" ? 40 : 60;
+
+  startTime = Math.max(0, Math.min(startTime, audioDuration - 0.1));
+  endTime = Math.max(startTime + 0.1, Math.min(endTime, audioDuration));
+
+  // Cap max duration based on format
+  if(endTime - startTime > maxAllowed){
+    endTime = startTime + maxAllowed;
+  }
+
+  const l = (startTime / audioDuration) * 100;
+  const r = (endTime / audioDuration) * 100;
+
+  selection.style.left = l + "%";
+  selection.style.width = (r - l) + "%";
+  startHandle.style.left = l + "%";
+  endHandle.style.left = r + "%";
+
+  if(!fromInput){
+    inputStart.value = startTime.toFixed(1);
+    inputEnd.value = endTime.toFixed(1);
+  }
+  inputStart.max = (audioDuration - 0.1).toFixed(1);
+  inputEnd.max = audioDuration.toFixed(1);
+
+  const dur = endTime - startTime;
+  previewDuration.textContent = fmt(dur) + ` (${dur.toFixed(1)}s)`;
+}
+
+// Draw Waveform
+function drawWave(samples){
+  if(!samples) return;
+  cachedSamples = samples;
+  const dpr = window.devicePixelRatio || 1;
+  const r = wave.getBoundingClientRect();
+  canvas.width = r.width * dpr;
+  canvas.height = r.height * dpr;
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  const w = r.width;
+  const h = r.height;
+  const mid = h / 2;
+  ctx.clearRect(0, 0, w, h);
+
+  // Gradient
+  const grad = ctx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, "#38bdf8");
+  grad.addColorStop(0.5, "#60a5fa");
+  grad.addColorStop(1, "#3b82f6");
+
+  ctx.fillStyle = grad;
+  const barWidth = 3;
+  const gap = 1;
+  const totalBars = Math.floor(w / (barWidth + gap));
+  const step = Math.max(1, Math.floor(samples.length / totalBars));
+
+  for(let i = 0; i < totalBars; i++){
+    const sampleIdx = Math.min(samples.length - 1, i * step);
+    const amp = Math.min(1, Math.max(0.08, samples[sampleIdx] || 0));
+    const barHeight = amp * (h * 0.85);
+    const x = i * (barWidth + gap);
+    const y = mid - barHeight / 2;
+    ctx.fillRect(x, y, barWidth, barHeight);
+  }
+}
+
+// Redraw on window resize
+window.addEventListener("resize", () => {
+  if(cachedSamples) drawWave(cachedSamples);
+  updateUI();
+});
+
+// Load audio data into WebAudio and compute waveform
 async function loadWave(src){
   try{
-    const res=await fetch(src);if(!res.ok)throw new Error("preview failed");
-    const buf=await res.arrayBuffer();
-    const ctx=new (window.AudioContext||window.webkitAudioContext)();
-    const decoded=await ctx.decodeAudioData(buf);
-    audioDuration=decoded.duration;
-    const raw=decoded.getChannelData(0), n=500;
-    const samples=new Float32Array(n), block=Math.max(1,Math.floor(raw.length/n));
-    for(let i=0;i<n;i++){
-      let sum=0,end=Math.min(raw.length,(i+1)*block);
-      for(let j=i*block;j<end;j++)sum+=Math.abs(raw[j]);
-      samples[i]=sum/Math.max(1,end-i*block);
+    const res = await fetch(src);
+    if(!res.ok) throw new Error("Could not decode audio");
+    const buf = await res.arrayBuffer();
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const decoded = await ctx.decodeAudioData(buf);
+    audioDuration = decoded.duration;
+
+    const raw = decoded.getChannelData(0);
+    const n = 600;
+    const samples = new Float32Array(n);
+    const block = Math.max(1, Math.floor(raw.length / n));
+    for(let i = 0; i < n; i++){
+      let sum = 0;
+      const end = Math.min(raw.length, (i + 1) * block);
+      for(let j = i * block; j < end; j++) sum += Math.abs(raw[j]);
+      samples[i] = sum / Math.max(1, end - i * block);
     }
-    drawWave(samples);updateUI();
-    try{await ctx.close()}catch(e){}
-  }catch(e){
-    audioDuration=Number.isFinite(audio.duration)&&audio.duration>0?audio.duration:30;
-    drawWave(new Float32Array(500).map(()=>.15+Math.random()*.65));
+    drawWave(samples);
+    updateUI();
+    try{ await ctx.close(); }catch(e){}
+  } catch(e) {
+    audioDuration = Number.isFinite(audio.duration) && audio.duration > 0 ? audio.duration : 30;
+    const fallback = new Float32Array(300).map(() => 0.15 + Math.random() * 0.6);
+    drawWave(fallback);
     updateUI();
   }
 }
-function selectFile(file){
-  if(!file)return;
-  selectedFile=file;previewFilename=null;
-  currentUrl=URL.createObjectURL(file);
-  previewCard.classList.add("show");
-  audio.src=currentUrl;audio.load();
-  startTime=0;endTime=30;
-  loadWave(currentUrl);
-  show("READY — "+file.name);
-}
-fileInput.addEventListener("change",e=>selectFile(e.target.files[0]));
-dropZone.addEventListener("dragover",e=>{e.preventDefault();dropZone.style.borderColor="#3b82f6"});
-dropZone.addEventListener("dragleave",()=>dropZone.style.borderColor="#33405d");
-dropZone.addEventListener("drop",e=>{
-  e.preventDefault();dropZone.style.borderColor="#33405d";
-  selectFile(e.dataTransfer.files[0]);
+
+// Audio playhead sync
+audio.addEventListener("timeupdate", () => {
+  if(!audioDuration) return;
+  const pct = (audio.currentTime / audioDuration) * 100;
+  playhead.style.display = "block";
+  playhead.style.left = pct + "%";
 });
-audio.addEventListener("loadedmetadata",()=>{
-  if(audio.duration>0){
-    audioDuration=audio.duration;
-    endTime=Math.min(30,audioDuration);
-    updateUI();
-  }
+
+audio.addEventListener("ended", () => {
+  playhead.style.display = "none";
+});
+
+// Click wave to seek
+wave.addEventListener("click", (e) => {
+  if(!audioDuration || dragging) return;
+  const r = wave.getBoundingClientRect();
+  const t = Math.max(0, Math.min(audioDuration, ((e.clientX - r.left) / r.width) * audioDuration));
+  audio.currentTime = t;
+  audio.play().catch(() => {});
 });
 
 function xTime(x){
-  const r=wave.getBoundingClientRect();
-  return Math.max(0,Math.min(audioDuration,(x-r.left)/r.width*audioDuration));
+  const r = wave.getBoundingClientRect();
+  return Math.max(0, Math.min(audioDuration, ((x - r.left) / r.width) * audioDuration));
 }
-startHandle.addEventListener("pointerdown",e=>{dragging="start";e.preventDefault()});
-endHandle.addEventListener("pointerdown",e=>{dragging="end";e.preventDefault()});
-window.addEventListener("pointermove",e=>{
-  if(!dragging||!audioDuration)return;
-  const t=xTime(e.clientX);
-  if(dragging==="start")startTime=Math.min(t,endTime-.1);
-  else endTime=Math.max(t,startTime+.1);
+
+// Handle dragging
+startHandle.addEventListener("pointerdown", e => { dragging = "start"; e.preventDefault(); });
+endHandle.addEventListener("pointerdown", e => { dragging = "end"; e.preventDefault(); });
+
+window.addEventListener("pointermove", e => {
+  if(!dragging || !audioDuration) return;
+  const t = xTime(e.clientX);
+  if(dragging === "start"){
+    startTime = Math.min(t, endTime - 0.1);
+  } else {
+    endTime = Math.max(t, startTime + 0.1);
+  }
   updateUI();
 });
-window.addEventListener("pointerup",()=>dragging=null);
+window.addEventListener("pointerup", () => { dragging = null; });
 
-document.querySelectorAll(".tab").forEach(tab=>{
-  tab.addEventListener("click",()=>{
-    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-    document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+// Manual Inputs
+inputStart.addEventListener("change", () => {
+  startTime = parseFloat(inputStart.value) || 0;
+  updateUI(true);
+});
+inputEnd.addEventListener("change", () => {
+  endTime = parseFloat(inputEnd.value) || 30;
+  updateUI(true);
+});
+
+// Presets
+document.querySelectorAll(".preset-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    if(!audioDuration) return;
+    const dur = parseFloat(btn.dataset.sec) || 30;
+    endTime = Math.min(startTime + dur, audioDuration);
+    updateUI();
+  });
+});
+
+// Format selection change
+formatSelect.addEventListener("change", () => {
+  if(formatSelect.value === "m4r" && (endTime - startTime) > 40){
+    endTime = startTime + 40;
+    updateUI();
+  }
+});
+
+// Select File Handler
+function selectFile(file){
+  if(!file) return;
+  selectedFile = file;
+  previewFilename = null;
+  currentSourceType = "upload";
+  currentUrl = URL.createObjectURL(file);
+  previewSourceName.textContent = `— ${file.name}`;
+  previewCard.classList.add("show");
+  audio.src = currentUrl;
+  audio.load();
+  startTime = 0;
+  endTime = 30;
+  loadWave(currentUrl);
+  result.className = "result";
+  adResult.style.display = "none";
+}
+
+fileInput.addEventListener("change", e => selectFile(e.target.files[0]));
+dropZone.addEventListener("click", () => fileInput.click());
+dropZone.addEventListener("dragover", e => { e.preventDefault(); dropZone.style.borderColor = "#3b82f6"; });
+dropZone.addEventListener("dragleave", () => { dropZone.style.borderColor = "#33446b"; });
+dropZone.addEventListener("drop", e => {
+  e.preventDefault();
+  dropZone.style.borderColor = "#33446b";
+  if(e.dataTransfer.files && e.dataTransfer.files[0]){
+    selectFile(e.dataTransfer.files[0]);
+  }
+});
+
+// Tab Switch
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(x => x.classList.remove("active"));
     tab.classList.add("active");
     document.getElementById(tab.dataset.tab).classList.add("active");
   });
 });
 
-document.getElementById("uploadCreate").addEventListener("click",async()=>{
-  if(!selectedFile){show("Choose an audio/video file first.");return}
-  const btn=document.getElementById("uploadCreate");btn.disabled=true;btn.textContent="Processing...";
-  try{
-    const fd=new FormData();
-    fd.append("file",selectedFile);
-    fd.append("start",startTime);
-    fd.append("duration",Math.max(.1,endTime-startTime));
-    const res=await fetch("/create-ringtone",{method:"POST",body:fd});
-    const data=await res.json();
-    if(!res.ok||!data.success)throw new Error(data.error||"Ringtone creation failed");
-    show("RINGTONE CREATED",true,"/download/"+encodeURIComponent(data.filename));
-  }catch(e){show(e.message||"Server connection error")}
-  finally{btn.disabled=false;btn.textContent="Create Ringtone"}
-});
+// Fetch URL Media
+document.getElementById("loadUrl").addEventListener("click", async () => {
+  const url = document.getElementById("mediaUrl").value.trim();
+  if(!url){
+    showResult("Please paste a valid media URL first.");
+    return;
+  }
+  const btn = document.getElementById("loadUrl");
+  btn.disabled = true;
+  btn.textContent = "Extracting Audio...";
+  result.className = "result";
+  adResult.style.display = "none";
 
-document.getElementById("loadUrl").addEventListener("click",async()=>{
-  const url=document.getElementById("mediaUrl").value.trim();
-  if(!url){show("Paste a URL first.");return}
-  const btn=document.getElementById("loadUrl");btn.disabled=true;btn.textContent="Loading...";
-  try{
-    const fd=new FormData();fd.append("url",url);
-    const res=await fetch("/preview-from-url",{method:"POST",body:fd});
-    const data=await res.json();
-    if(!res.ok||!data.success)throw new Error(data.error||"Could not load URL");
-    previewFilename=data.filename;
-    currentUrl="/preview/"+encodeURIComponent(previewFilename);
+  try {
+    const fd = new FormData();
+    fd.append("url", url);
+    const res = await fetch("/preview-from-url", { method: "POST", body: fd });
+    const data = await res.json();
+    if(!res.ok || !data.success){
+      throw new Error(data.error || (data.details ? data.error + ": " + data.details : "Could not fetch media."));
+    }
+    previewFilename = data.filename;
+    selectedFile = null;
+    currentSourceType = "url";
+    currentUrl = "/preview/" + encodeURIComponent(previewFilename);
+    previewSourceName.textContent = `— ${data.platform || "Media Stream"}`;
     previewCard.classList.add("show");
-    audio.src=currentUrl;audio.load();
-    startTime=0;endTime=30;
+    audio.src = currentUrl;
+    audio.load();
+    startTime = 0;
+    endTime = 30;
     await loadWave(currentUrl);
-    show("MEDIA LOADED — select the ringtone section.");
-  }catch(e){show(e.message||"Server connection error")}
-  finally{btn.disabled=false;btn.textContent="Load Media"}
+  } catch(e) {
+    showResult(e.message || "Server connection error while loading media.");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "⚡ Load Media";
+  }
 });
 
-document.getElementById("urlCreate").addEventListener("click",async()=>{
-  const url=document.getElementById("mediaUrl").value.trim();
-  if(!url){show("Paste a URL first.");return}
-  if(!previewFilename){show("Load the URL first.");return}
-  const btn=document.getElementById("urlCreate");btn.disabled=true;btn.textContent="Processing...";
-  try{
-    const fd=new FormData();
-    fd.append("url",url);
-    fd.append("start",startTime);
-    fd.append("duration",Math.max(.1,endTime-startTime));
-    fd.append("preview_filename",previewFilename);
-    const res=await fetch("/create-from-url",{method:"POST",body:fd});
-    const data=await res.json();
-    if(!res.ok||!data.success)throw new Error(data.error||"Ringtone creation failed");
-    show("RINGTONE CREATED",true,"/download/"+encodeURIComponent(data.filename));
-  }catch(e){show(e.message||"Server connection error")}
-  finally{btn.disabled=false;btn.textContent="Create Ringtone From URL"}
+// Unified "Create Ringtone" button
+createRingtoneBtn.addEventListener("click", async () => {
+  const format = formatSelect.value;
+  const fadeIn = fadeInCheck.checked;
+  const fadeOut = fadeOutCheck.checked;
+  const dur = Math.max(0.1, endTime - startTime);
+
+  createRingtoneBtn.disabled = true;
+  createRingtoneBtn.textContent = "Generating Ringtone...";
+
+  try {
+    const fd = new FormData();
+    fd.append("start", startTime);
+    fd.append("duration", dur);
+    fd.append("format", format);
+    fd.append("fade_in", fadeIn);
+    fd.append("fade_out", fadeOut);
+
+    let res, data;
+    if(currentSourceType === "upload"){
+      if(!selectedFile) throw new Error("Please choose an audio or video file first.");
+      fd.append("file", selectedFile);
+      res = await fetch("/create-ringtone", { method: "POST", body: fd });
+    } else {
+      const url = document.getElementById("mediaUrl").value.trim();
+      if(!url) throw new Error("Please enter a URL.");
+      fd.append("url", url);
+      if(previewFilename) fd.append("preview_filename", previewFilename);
+      res = await fetch("/create-from-url", { method: "POST", body: fd });
+    }
+
+    data = await res.json();
+    if(!res.ok || !data.success){
+      throw new Error(data.error || "Ringtone generation failed.");
+    }
+
+    const downloadPath = "/download/" + encodeURIComponent(data.filename);
+    showResult("Ringtone ready to download!", true, downloadPath, data.filename, format);
+
+  } catch(e) {
+    showResult(e.message || "An unexpected error occurred.");
+  } finally {
+    createRingtoneBtn.disabled = false;
+    createRingtoneBtn.textContent = "✂️ Generate Ringtone";
+  }
 });
 </script>
 </body>
