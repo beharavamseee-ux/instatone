@@ -2,7 +2,7 @@ from pathlib import Path
 import subprocess
 import time
 import uuid
-from urllib.parse import urlparse
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
 
 from fastapi import FastAPI, Request, UploadFile, File, Form
 from fastapi.responses import HTMLResponse, FileResponse, PlainTextResponse, Response
@@ -34,6 +34,33 @@ def cleanup_old_files(max_age_seconds: int = 1800):
                     item.unlink(missing_ok=True)
         except Exception:
             pass
+
+
+def sanitize_url(url: str) -> str:
+    """Strip unnecessary playlist, mix, or tracking query parameters."""
+    url = url.strip()
+    try:
+        parsed = urlparse(url)
+        hostname = (parsed.hostname or "").lower()
+
+        if "youtube.com" in hostname or "youtu.be" in hostname:
+            qs = parse_qs(parsed.query)
+            if "v" in qs:
+                clean_query = urlencode({"v": qs["v"][0]})
+                return urlunparse((parsed.scheme, parsed.netloc, "/watch", "", clean_query, ""))
+            elif "youtu.be" in hostname:
+                video_id = parsed.path.strip("/")
+                return f"https://www.youtube.com/watch?v={video_id}"
+            elif "/shorts/" in parsed.path:
+                video_id = parsed.path.split("/shorts/")[1].split("/")[0].split("?")[0]
+                return f"https://www.youtube.com/watch?v={video_id}"
+
+        elif "instagram.com" in hostname:
+            return f"{parsed.scheme}://{parsed.netloc}{parsed.path}"
+
+    except Exception:
+        pass
+    return url
 
 
 def detect_platform(url: str) -> str:
@@ -217,7 +244,7 @@ async def create_ringtone(
 @app.post("/preview-from-url")
 async def preview_from_url(url: str = Form(...)):
     cleanup_old_files()
-    url = url.strip()
+    url = sanitize_url(url)
 
     if not url.startswith(("http://", "https://")):
         return {"error": "Please enter a valid URL."}
@@ -230,7 +257,6 @@ async def preview_from_url(url: str = Form(...)):
         "yt-dlp",
         "--no-playlist",
         "--max-filesize", "50M",
-        "--extractor-args", "youtube:player_client=android",
         "-f", "bestaudio/best",
         "--no-write-thumbnail",
         "-o", str(output_template),
@@ -347,7 +373,7 @@ async def create_from_url(
     fade_out: bool = Form(False),
 ):
     cleanup_old_files()
-    url = url.strip()
+    url = sanitize_url(url)
 
     if not url.startswith(("http://", "https://")):
         return {"error": "Please enter a valid URL."}
@@ -374,7 +400,6 @@ async def create_from_url(
             "yt-dlp",
             "--no-playlist",
             "--max-filesize", "50M",
-            "--extractor-args", "youtube:player_client=android",
             "-f", "bestaudio/best",
             "--no-write-thumbnail",
             "-o", str(output_template),
